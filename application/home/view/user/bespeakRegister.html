@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>预约登记</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+</head>
+<body class="bespeak">
+	<img src="/css/images/logo2.png" class="logo" width="100%">
+	<div class="information">
+		预约登记
+		<form class="form">
+			姓名<input type="text" name="username" placeholder="请输入您的姓名" class="input">
+			电话<input type="text" name="tel" placeholder="请输入您的电话号码" class="input">
+			预约参观时间
+			<div class="input">
+				<input type="text" name="visit_time" placeholder="请输入您的参观时间" class="none" id="date">
+				<img src="/css/images/date.png" class="date">
+			</div>
+			<button class="save">保存</button>
+		</form>
+	</div>
+	<script type="text/javascript">
+		laydate.render({
+                elem: '#date',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+	</script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/js/visitorReg.js">
+	</script>
+</body>
+</html>

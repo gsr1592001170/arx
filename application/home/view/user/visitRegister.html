@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>参观登记</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+</head>
+<body class="visit">
+	<img src="/css/images/logo.png" class="logo" width="100%">
+	<div class="information">
+		参观登记
+		<form class="form">
+			姓名<input type="text" name="username" placeholder="请输入您的姓名" class="input">
+			电话<input type="text" name="tel" placeholder="请输入您的电话号码" class="input">
+			预产期
+			<div class="input">
+				<input type="text" name="yuchanqi" placeholder="请输入您的预产时间" class="none" id="date">
+				<img src="/css/images/date.png" class="date">
+			</div>
+			产检医院<input type="text" name="hospital" placeholder="请输入您的产检医院" class="input">
+			来源
+			<div class="source">
+				<input type="radio" name="source" value="电视电话">电视电话
+				<input type="radio" name="source" value="朋友圈">朋友圈
+				<input type="radio" name="source" value="报纸">报纸
+				<input type="radio" name="source" value="网络">网络
+				<input type="radio" name="source" value="其他">其他
+			</div>
+			<button class="save">保存</button>
+			
+		</form>
+	</div>
+	<script type="text/javascript">
+		laydate.render({
+                elem: '#date',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+	</script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.js"></script>
+	<script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/js/visitorReg.js">
+	</script>
+</body>
+</html>
