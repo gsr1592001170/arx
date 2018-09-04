@@ -34,6 +34,7 @@ class UserController extends Controller
                return get_json(0,"非法操作：重复登记");
            }
            //入库
+           $data['visit_time']=time();
            if (User::create($data)) {
                return get_json(1,"登记成功");
            }
