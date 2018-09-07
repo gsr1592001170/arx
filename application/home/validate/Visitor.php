@@ -15,7 +15,7 @@ class Visitor extends Validate
 {
     protected $rule = [
         'name'  =>  'require',
-        'tel'=>['require','regex'=>'0?(13|14|15|17|18|19)[0-9]{9}'],
+        'tel'=>['require','unique:visitor','regex'=>'0?(13|14|15|17|18|19)[0-9]{9}'],
         'room'=>'require',
     ];
     protected $field=[

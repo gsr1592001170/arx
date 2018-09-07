@@ -15,7 +15,7 @@ class User extends Validate
 {
     protected $rule = [
         'username'  =>  'require',
-        'tel'=>['unique:user','regex'=>'0?(13|14|15|17|18|19)[0-9]{9}'],
+        'tel'=>['require','unique:user','regex'=>'0?(13|14|15|17|18|19)[0-9]{9}'],
         'source'=>'require',
         'visit_time'=>'require'
     ];

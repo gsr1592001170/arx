@@ -6,11 +6,7 @@ $('button').click(function () {
         url: "" ,//url
         data: $('input').serialize(),
         success: function (data) {
-            alert(data.msg);
-
-        },
-        error : function() {
-            alert("异常！");
+            alert("提示："+data.msg);
         }
     });
 })

@@ -4,6 +4,7 @@ namespace app\home\controller;
 
 use app\home\model\User;
 use think\Controller;
+use think\Db;
 use think\Loader;
 use think\Request;
 
@@ -58,7 +59,10 @@ class UserController extends Controller
                 return get_json(0,$validate->getError());
             }
             if (User::create($data)) {
-                return get_json(1,"预约成功");
+                $row=get_row($data['username']."线上预约参观成功");
+                if (Db::name("notice")->insert($row)) {
+                    return get_json(1,"预约成功");
+                }
             }
             return get_json(0,"预约失败");
         }

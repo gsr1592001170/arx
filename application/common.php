@@ -17,3 +17,12 @@ function get_json($status,$msg="",$data=null){
         "data"=>$data
     ]);
 }
+
+function get_row($str){
+    $row = [
+        "create_time"=>time(),
+        "content"=>$str,
+    ];
+
+    return $row;
+}
