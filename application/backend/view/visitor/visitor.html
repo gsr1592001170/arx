@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-访客登记</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!-- 3 访客登记-->
+            <li>
+                <div class="header">
+                    <span class="marr">访客登记</span>
+                    <div class="shaixuan">
+                        <form action="" method="get">
+                        <input type="date" name="" class="sxtime">
+                        <img src="/css/images/calendar.png" id="visitTime" class="click">
+                        <span class="search">
+                            <input type="text" name="keyword" placeholder="输入电话号码" class="name" value="{$_GET['keyword']??''}">
+                            <button type="submit" style="float: right"><img src="/css/images/search.png"></button>
+                        </span>
+                        </form>
+                    </div>
+                </div>
+                <?php if($adminId==1){?>
+                <span class="add click color"><a href="{:url('visitor/add')}" target="iframe">添加访客</a></span>
+                <?php } ?>
+                <table class="query">
+                    <tr>
+                    <td class="multi"></td>
+                        <td>姓名</td>
+                        <td>电话</td>
+                        <td>探访日期</td>
+                        <td>探访房间号</td>
+                        <td></td>
+                        <td class="kong"></td>
+                    </tr>
+                   <?php foreach($visits as $visit):?>
+                    <tr>
+                    <td class="multi"><input type="checkbox" name="handle" checked=""></td>
+                        <td>{$visit['name']}</td>
+                        <td>{$visit['tel']}</td>
+                        <td>{$visit['visit_time']}</td>
+                        <td>{$visit['room']}</td>
+                        <td><a href="{:url('visitor/del',$visit->toArray())}" class="color delete click">删除</a></td>
+                        <td class="kong"></td>
+                    </tr>
+                    <?php endforeach;?>
+                </table>
+                {$visits->render()}
+            </li>
+    <script type="text/javascript">
+        // 时间选框
+        laydate.render({
+                elem: '#visitTime',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+        // 删除
+        $(".query .delete").click(function(){
+            layer.confirm('是否删除?', {title:'提示'}, function(index){
+              // 删除操作
+              layer.close(index);
+            })
+
+        })
+    </script>
+</body>
+</html>

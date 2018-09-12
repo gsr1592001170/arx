@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-顾问列表</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layer.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<li>
+            <div class="header">
+                <span class="marr">顾问列表</span>
+                <div class="shaixuan">
+                    <span class="search">
+                        <input type="text" name="" placeholder="输入电话号码" class="name">
+                        <img src="/css/images/search.png" class="click">
+                    </span>
+                </div>
+            </div>
+            <table class="query">
+                <tr>
+                    <td class="multi"></td>
+                    <td>姓名</td>
+                    <td>账号</td>
+                    <td>状态</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <?php foreach($admins as $admin):?>
+                <tr>
+                    <td class="multi"><input type="checkbox" name="handle" checked=""></td>
+                    <td>{$admin['name']}</td>
+                    <td>{$admin['username']}</td>
+                    <td>{$admin['del']}</td>
+                    <td class="color"><a href="{:url('admin/edit',$admin->toArray())}" target="iframe"><span class="remark click color">更改密码</span></a></td>
+                <td><a href="{:url('admin/del',$admin->toArray())}"><span>删除</span></a></td>
+                </tr>
+                <?php endforeach;?>
+            </table>
+            {$admins->render()}
+        </li>
+    </ul>
+    <script type="text/javascript">
+        // 时间选择
+        laydate.render({
+                elem: '#targetTime',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+    </script>
+</body>
+</html>

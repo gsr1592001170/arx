@@ -7,10 +7,10 @@ use app\backend\model\User;
 use think\Controller;
 use think\Loader;
 use think\Request;
+use think\Session;
 
-class UserController extends Controller
+class UserController extends BaseController
 {
-
     /**
      * @param Request $request
      * @return \think\response\Json
@@ -21,11 +21,10 @@ class UserController extends Controller
 
         if ($request->isPost()) {
             $data = $request->post();
-
             //验证
             $validate = Loader::validate('User');
             if (!$validate->check($data)) {
-                return get_json(0, $validate->getError());
+                return get_json(0,$validate->getError());
             }
 
             if (isset($data['visit_time'])) {
@@ -42,15 +41,24 @@ class UserController extends Controller
             return get_json(0, "添加失败");
         }
         //显示视图
-
+        return view("addUser");
     }
     /*
      * 游客列表
      */
     public function index(){
-        $users=User::all();
-
-        return json($users);
+        $keyword=\request()->get("keyword")??"";
+        $users=User::paginate(3);
+        foreach ($users as $k=>$user){
+            $users[$k]=$user->toArray();
+            if ($keyword!=null && $user['visit_time']!=$keyword){
+                unset($users[$k]);
+            }
+        }
+        if ($this->adminId>1){
+            return view("adviserTourist",compact("users"));
+        }
+        return view("tourist",compact("users"));
     }
     /*
      * 接待游客
@@ -63,9 +71,12 @@ class UserController extends Controller
         $data=$user->toArray();
         unset($data['id']);
         $data['admin_id']=2;
+        $data['status']=1;
+        $data['source']=$data['source']??"其他";
         Member::create($data);
         $user->delete();
-        return get_json(1,"接待成功,此客户已成为你的目标客户");
+
+        return $this->redirect("user/index");
     }
 
     /*
@@ -77,6 +88,6 @@ class UserController extends Controller
 
         $user->delete();
 
-        return get_json(1,"删除成功");
+        return $this->redirect("user/index");
     }
 }

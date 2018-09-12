@@ -1,0 +1,751 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/data.js"></script>
+</head>
+<body class="data">
+	<div class="head">
+		<img src="/css/images/logodata.png" width="100%" class="logodata">
+		<div class="setup">
+			<img src="/css/images/news.png" class="new">
+			<if>
+				<span class="redcircle"></span>
+			</if>
+			哈哈哈&nbsp;|&nbsp;退出
+		</div>
+	</div>
+	<div class="bottom">
+		<ul class="left">
+			<li class="on">
+				<img src="/css/images/list1-on.png">个人数据&nbsp;&nbsp;></span>
+			</li>
+			<li class="list" onclick="user()">
+				<img src="/css/images/list2.png">游客信息&nbsp;&nbsp;></span>
+			</li>
+			<li class="list">
+				<img src="/css/images/list3.png">客户信息&nbsp;&nbsp;></span>
+				<ul class="customer">
+					<li class="color">>>目标客户</li>
+					<li>>>意向客户</li>
+					<li>>>预签约客户</li>
+					<li>>>签约客户</li>
+				</ul>
+			</li>
+			<li class="list" onclick="visitor()">
+				<img src="/css/images/list4.png">访客登记&nbsp;&nbsp;></span>
+			</li>
+		</ul>
+		<ul class="right">
+			<!-- 0 个人数据 数据中心 -->
+			<li>
+				<div class="header">
+					<span class="marr">个人数据</span>
+					<span class="performance click">业绩查询</span>
+					<ul class="times">
+						<li class="bian">昨日</li>
+						<li class="bian">最近7日</li>
+						<li class="selected">最近30日</li>
+					</ul>
+				</div>
+				<ul class="tubiao">
+					<li class="signing zhu di">
+						签约业绩
+						<div class="total">
+							总签约金额：{$data['yj']['moneys']}<br>
+							总人数：{$data['yj']['count']}人
+						</div>
+						<div id="qianyue" class="tu zhu di marglft"></div>
+					</li>
+					<li class="di">
+						侧重需求
+						<div id="cezhong" class="tu marglft"></div>
+					</li>
+					<li class="zhu">
+						客户种类
+						<div id="kehu" class="tu zhu marglft"></div>
+					</li>
+					<li>
+						渠道来源
+						<div id="qudao" class="tu"></div>
+					</li>
+				</ul>
+			</li>
+			<!-- 1 游客信息 -->
+			<li>
+				<div class="header">
+					<span class="marr">游客信息</span>
+					<div class="choicetime">
+						<input type="text" name="" class="choice" placeholder="选择日期" id="touristtime">
+						<img src="/css/images/calendar.png" class="shijian">
+					</div>
+				</div>
+				<table class="query" id="user" align="center">
+					<!--游客信息-->
+				</table>
+				<div class="dibu">
+					<ul class="next">
+						<li>上一页</li>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>下一页</li>
+					</ul>
+				</div>
+			</li>
+			<!-- 2 客户信息  目标客户-->
+			<li>
+				<div class="header">
+					<span class="marr">目标客户</span>
+					<div class="shaixuan">
+						<input type="date" name="" class="sxtime">
+						<img src="/css/images/calendar.png">
+						<span class="search">
+							<input type="text" name="" placeholder="输入姓名" class="name">
+							<img src="/css/images/search.png">
+						</span>
+					</div>
+				</div>
+				<table class="query">
+					<tr>
+						<td>姓名</td>
+						<td>电话</td>
+						<td>预约参观时间</td>
+						<td></td>
+						<td class="kong"></td>
+					</tr>
+					<volist>
+						<td>张三</td>
+						<td>15326845861</td>
+						<td>2018-07-01</td>
+						<td><a class="operate click">编辑<a></td>
+						<td class="kong"></td>
+					</volist>
+				</table>
+				<div class="dibu">
+					<ul class="next">
+						<li>上一页</li>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>下一页</li>
+					</ul>
+				</div>
+			</li>
+			<!-- 3 访客登记-->
+			<li>
+				<div class="header">
+					<span class="marr">访客登记</span>
+					<div class="shaixuan">
+						<input type="date" name="" class="sxtime">
+						<img src="/css/images/calendar.png">
+						<span class="search">
+							<input type="text" name="" placeholder="输入姓名" class="name">
+							<img src="/css/images/search.png">
+						</span>
+					</div>
+				</div>
+				<table class="query" id="visitor">
+					<!--访客信息-->
+				</table>
+				<div class="dibu">
+					<span class="deleteAll">全部删除</span>
+					<ul class="next">
+						<li>上一页</li>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>下一页</li>
+					</ul>
+				</div>
+			</li>
+			<!--4 三 客户信息的意向客户 -->
+			<li>
+				<div class="header">
+					<span class="marr">意向客户</span>
+					<div class="shaixuan">
+						<input type="date" name="" class="sxtime">
+						<img src="/css/images/calendar.png">
+						<span class="search">
+							<input type="text" name="" placeholder="输入姓名" class="name">
+							<img src="/css/images/search.png">
+						</span>
+					</div>
+				</div>
+				<table class="detail">
+					<tr>
+						<td>姓名</td>
+						<td>电话</td>
+						<td>预产期</td>
+						<td>生产医院</td>
+						<td>预约参观时间</td>
+						<td>地址</td>
+						<td>来源</td>
+						<td></td>
+					</tr>
+					<volist>
+						<td>张三</td>
+						<td>15788912345</td>
+						<td>2018.05.14</td>
+						<td>重庆市第一人民医院</td>
+						<td>2018.05.10</td>
+						<td>南岸区四公里</td>
+						<td>网络</td>
+						<td class="color"><a class="operate">预缴诚意金</a></td>
+					</volist>
+				</table>
+				<div class="dibu">
+					<ul class="next">
+						<li>上一页</li>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>下一页</li>
+					</ul>
+				</div>
+			</li>
+			<!--5 三 客户信息的预签约客户 -->
+			<li>
+				<div class="header">
+					<span class="marr">预签约客户</span>
+					<div class="shaixuan">
+						<input type="date" name="" class="sxtime">
+						<img src="/css/images/calendar.png">
+						<span class="search">
+							<input type="text" name="" placeholder="输入姓名" class="name">
+							<img src="/css/images/search.png">
+						</span>
+					</div>
+				</div>
+				<table class="detail">
+					<tr>
+						<td>姓名</td>
+						<td>电话</td>
+						<td>预产期</td>
+						<td>生产医院</td>
+						<td>地址</td>
+						<td>来源</td>
+						<td></td>
+					</tr>
+					<volist>
+						<td>张三</td>
+						<td>15788912345</td>
+						<td>2018.05.14</td>
+						<td>重庆市第一人民医院</td>
+						<td>南岸区四公里</td>
+						<td>网络</td>
+						<td class="color"><a class="operate">签约</a></td>
+					</volist>
+				</table>
+				<div class="dibu">
+					<ul class="next">
+						<li>上一页</li>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>下一页</li>
+					</ul>
+				</div>
+			</li>
+			<!--6 三 客户信息的签约客户 -->
+			<li>
+				<div class="header">
+					<span class="marr">签约客户</span>
+					<div class="shaixuan">
+						<input type="date" name="" class="sxtime">
+						<img src="/css/images/calendar.png">
+						<span class="search">
+							<input type="text" name="" placeholder="输入姓名" class="name">
+							<img src="/css/images/search.png">
+						</span>
+					</div>
+				</div>
+				<table class="detail">
+					<tr>
+						<td>姓名</td>
+						<td>电话</td>
+						<td>预产期</td>
+						<td>生产医院</td>
+						<td>签约时间</td>
+						<td>地址</td>
+						<td>预定房型</td>
+						<td>预定房号</td>
+						<td>签约金额</td>
+						<td>预缴金额</td>
+						<td>未付尾款</td>
+						<td>客户来源</td>
+						<td>套餐备注</td>
+						<td></td>
+					</tr>
+					<volist>
+						<td>张三</td>
+						<td>15788912345</td>
+						<td>2018.05.14</td>
+						<td>重庆市第一人民医院</td>
+						<td>2018.05.10</td>
+						<td>南岸区四公里</td>
+						<td>两室两厅</td>
+						<td>301</td>
+						<td>5000</td>
+						<td>1000</td>
+						<td>4000</td>
+						<td>网络</td>
+						<td class="color">备注</td>
+					</volist>
+				</table>
+				<div class="dibu">
+					<ul class="next">
+						<li>上一页</li>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>下一页</li>
+					</ul>
+				</div>
+			</li>
+			<!-- 7 信息页面-->
+			<li>
+				<div class="header">
+					<span class="marr">信息</span>
+						<img src="/css/images/calendar.png">
+				</div>
+				<table class="query">
+					<volist>
+						<td>2018-07-01</td>
+						<td>长得帅线上预约成功</td>
+						<td class="kong"></td>
+					</volist>
+				</table>
+				<div class="dibu">
+					<span class="deleteAll">全部删除</span>
+					<ul class="next">
+						<li>上一页</li>
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+						<li>4</li>
+						<li>5</li>
+						<li>下一页</li>
+					</ul>
+				</div>
+			</li>
+			<!--8 三 客户信息的目标客户 编辑 -->
+			<li>
+				<div class="header">
+					<span class="marr">目标客户>编辑</span>
+				</div>
+				<ul class="edit">
+					<li>
+						<span class="bianju">
+							有无意向坐月子中心：
+							<input type="radio" name="confinement">有
+							<input type="radio" name="confinement">无
+						</span>
+						<span class="bianju">
+							客户侧重需求（多选）：
+							<input type="checkbox" name="demand">环境
+							<input type="checkbox" name="demand">地理位置
+							<input type="checkbox" name="demand">产后恢复
+							<input type="checkbox" name="demand">宝宝护理
+							<input type="checkbox" name="demand">营养月子餐
+							<input type="checkbox" name="demand">其它
+						</span>
+						<span class="bianju">
+							来源：
+							<input type="radio" name="source" value="male">电视电话
+							<input type="radio" name="source" value="male">朋友圈
+							<input type="radio" name="source" value="male">报纸
+							<input type="radio" name="source" value="male">网络
+							<input type="radio" name="source" value="male">其他
+						</span>
+					</li>
+					<li>
+						<span class="import">
+							预产期：
+							<input type="text" name="">
+						</span>
+						<span class="import">
+							生产医院：
+							<input type="text" name="">
+						</span>
+						<span class="import">
+							地址：
+							<input type="text" name="">
+						</span>
+					</li>
+					<li>
+						<ul>
+							<li>
+								客户家庭情况分析：
+								<textarea placeholder="第几胎、父母及配偶的意见、谁做主？"></textarea>
+							</li>
+							<li>
+								成交关键节点：
+								<textarea placeholder="关键需要解决的问题、家人思想的沟通、钱的问题？"></textarea>
+							</li>
+							<li>
+								下一步跟踪建议：
+								<textarea placeholder="接待人员根据情况提出下一步计划？"></textarea>
+							</li>
+							<li>
+								需要的资源：
+								<textarea placeholder="如果需要成交、需要申请的礼品、金额、服务？"></textarea>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<button class="save">保存</button>
+			</li>
+			<!--9 三 客户信息的意向客户 预缴诚意金-->
+			<li>
+				<div class="header">
+					<span class="marr">预签约客户>签约</span>
+				</div>
+				<div class="dibai">
+					<div class="yujiao">
+						预缴诚意金金额：（元）
+						<input type="number" name="">
+						预交日期:
+						<input type="" name="" id="yujiao">
+						<img src="/css/images/calendar.png" class="rili">
+						<button class="save">确认</button>
+					</div>
+				</div>
+			</li>
+			<!--10 三 客户信息的预签约客户  签约-->
+			<li>
+				<div class="header">
+					<span class="marr">预签约客户>签约</span>
+				</div>
+				<div class="dibai">
+					<div class="contract">
+						<span class="youbian">
+							预定房型
+							<select>
+								<option>一室一厅</option>
+								<option>二室一厅</option>
+								<option>二室二厅</option>
+								<option>幸福套房</option>
+							</select>
+							预定房号
+							<input type="" name=""> 
+							签约金额<input type="" name="">
+						</span>
+						<span class="youbian">
+							预缴定金
+							<input type="" name=""> 
+							未付尾款
+							<input type="" name=""> 
+							套餐备注<input type="" name="">   
+						</span>
+						<button class="save">确认</button>
+					</div>
+				</div>
+			</li>
+			<!--11 三 客户信息的签约客户   备注-->
+			<li>
+				<div class="header">
+					<span class="marr">签约客户>备注</span>
+				</div>
+				<ul class="edit">
+					<li>
+						客户需求<br>
+						<span class="tuoyuan">
+							产后护理
+						</span>
+						<span class="tuoyuan">
+							地理环境
+						</span>
+					</li>
+					<li>
+						客户家庭分析<br>
+						的将诶如今的风味的房间诶我的多么我我哦对即可哦ID较为偶发你们为房间诶染发剂偶尔附加费封口费课哦皮肤孔明，买点烧烤冷风机高额尬噶尔孔人头阿尔高抗美，奥利给
+					</li>
+					<li>
+						成交关键节点<br>
+						的将诶如今的风味的房间诶我的多么我我哦对即可哦ID较为偶发你们为房间诶染发剂偶尔附加费封口费课哦皮肤孔明，买点烧烤冷风机高额尬噶尔孔人头阿尔高抗美，奥利给
+					</li>
+					<li>
+						下一步跟踪建议<br>
+						的将诶如今的风味的房间诶我的多么我我哦对即可哦ID较为偶发你们为房间诶染发剂偶尔附加费封口费课哦皮肤孔明，买点烧烤冷风机高额尬噶尔孔人头阿尔高抗美，奥利给
+					</li>
+					<li>
+						需要的资源<br>
+						的将诶如今的风味的房间诶我的多么我我哦对即可哦ID较为偶发你们为房间诶染发剂偶尔附加费封口费课哦皮肤孔明，买点烧烤冷风机高额尬噶尔孔人头阿尔高抗美，奥利给
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		laydate.render({
+                elem: '#expected',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+		laydate.render({
+                elem: '#visittime',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+		laydate.render({
+                elem: '#touristtime',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+		laydate.render({
+                elem: '#yujiao',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+
+
+		var yeji = echarts.init(document.getElementById("qianyue"));
+        var signing = {
+        		color: ['#f0ca37', '#f18760'],
+			    legend: {
+			    	left:'left',
+			    	data:['金额', '人数']
+			    },
+			     tooltip: {},
+			    xAxis: {
+			    	type: 'category',
+			    	offset: 0,
+			    	axisTick: {show: false},
+			    	data:['第一周','第二周','第三周','第四周']
+			    },
+			    yAxis: [{
+			    	type: 'value',
+		            name: '金额：（元）'
+			    },{
+			    	type: 'value',
+		            name: '数量：（人）',
+		            min: 0,
+		            max: 20,
+		            interval: 5
+			    }],
+			    series: [
+			        {
+			        	name:'金额：（元）',
+			        	type: 'bar',
+                        data:[{$data['thirty']['first']},{$data['thirty']['second']},{$data['thirty']['third']},{$data['thirty']['fourth']}]
+			        },
+			        {
+			        name:'数量：（人）',
+			        yAxisIndex: 1,
+			        	type: 'bar',
+                        data:[{$data['thirty']['firstc']},{$data['thirty']['secondc']},{$data['thirty']['thirdc']},{$data['thirty']['fourthc']}]
+			        }
+			    ]
+			}
+        yeji.setOption(signing);
+        var xuqiu = echarts.init(document.getElementById("cezhong"));
+		var demand = {
+		    xAxis: {
+		        type: 'category',
+		        name:'需求',
+		        symbol:['none', 'arrow'],
+		        data: ['环境', '地理位置', '产后恢复', '宝宝护理', '营养月子餐', '其他']
+		    },
+		    yAxis: {
+		        type: 'value',
+		        name: '比重',
+		            axisLabel: {
+                formatter: '{value} %',
+                axisLine:{lineStyle:{color:'#f18760',width:1,type:'solid'}},
+            }
+		    },
+		    series: [{
+		        type: 'line',
+                data: [{$count['xq'][1]}, {$count['xq'][2]}, {$count['xq'][3]}, {$count['xq'][4]},{$count['xq'][5]}, {$count['xq'][0]}]
+		    }]
+		};
+        xuqiu.setOption(demand);
+        var zhonglei = echarts.init(document.getElementById("kehu"));
+         var customer = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            legend: {
+            	left:'left',
+            	itemHeight:14,
+            	itemWidth:14,
+            	borderRadius:0,
+                data:['销量']
+            },
+            xAxis: {
+            	name:'人数',
+                data: ["目标客户","意向客户","签约客户","预签约客户"]
+            },
+            yAxis: {
+            	    name: '种类',
+		            min: 0,
+		            max: 100,
+		            interval: 20,
+            },
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data:[
+                    {$count['zl'][1]},{$count['zl'][2]}, {$count['zl'][3]}, {$count['zl'][4]}
+                ] ,
+                itemStyle: {
+					normal: {
+					color: function(params) {
+					var colorList = [
+					'#f18760','#77c70e','#6652cf','#0cc0db'];
+					return colorList[params.dataIndex]
+					},
+					　　　　　//以下为是否显示
+					label: {
+						show: false
+						}
+					}
+				}
+            },
+		]};
+        zhonglei.setOption(customer);
+
+        var laiyuan = echarts.init(document.getElementById("qudao"));
+        var source = {
+			    tooltip: {
+			        trigger: 'item',
+			        formatter: "{a} <br/>{b}: {c} ({d}%)"
+			    },
+			    legend: {
+			        orient: 'vertical',
+			        left:'right',
+			        align:'left',
+            		itemWidth:18,
+            		itemHeight:18,
+			        data:['电视电话','朋友圈','报纸','网络','其它']
+			    },
+			    series: [
+			        {
+			            name:'渠道来源',
+			            type:'pie',
+			            radius: ['45%', '90%'],
+			            avoidLabelOverlap: false,
+			            label: {
+			                normal: {
+			                    show: false,
+			                    position: 'center'
+			                },
+			                emphasis: {
+			                    show: true,
+			                    textStyle: {
+			                        fontSize: '30',
+			                        fontWeight: 'bold'
+			                    }
+			                }
+			            },
+			            labelLine: {
+			                normal: {
+			                    show: false
+			                }
+			            },
+                        data:[
+                            {value:{$count['ly']['电视电话']}, name:'电视电话'},
+                            {value:{$count['ly']['朋友圈']}, name:'朋友圈'},
+                            {value:{$count['ly']['报纸']}, name:'报纸'},
+                            {value:{$count['ly']['网络']}, name:'网络'},
+                            {value:{$count['ly']['其他']}, name:'其他'}
+                        ],
+			            itemStyle: {
+				normal: {
+				color: function(params) {
+				var colorList = [
+				'#f0ca37','#0cc0db','#6652cf','#77c70e','#f18760'];
+				return colorList[params.dataIndex]
+				},
+				label: {
+				show: false
+				}
+				}
+				}
+			        }
+			    ]
+			};
+        laiyuan.setOption(source);
+
+	</script>
+
+	<script type="text/javascript">
+		function visitor() {
+            $.get("{:url('visitor/index')}",function(data,status){
+                if (data.status) {
+                    var str = "<tr>" +
+                    "<td>姓名</td>"+
+                    "<td>电话</td>"+
+                    "<td>探访日期</td>"+
+                    "<td>探访房间号</td>"+
+
+                        "</tr>";
+                    var data = data.data;
+
+                    for (i in data) {
+                        str += "<tr>" +
+                            "<td>" + data[i].name + "</td>" +
+                            "<td>" + data[i].tel + "</td>" +
+                            "<td>" + data[i].visit_time + "</td>" +
+                            "<td>" + data[i].room + "</td>" +
+                            "</tr>";
+                    }
+					$("#visitor").html(str);
+                }
+                });
+        }
+
+        function user() {
+            $.get("{:url('user/index')}",function(data,status){
+                    var str = "<tr>" +
+                        "<td>姓名</td>"+
+                        "<td>电话</td>"+
+                        "<td>预约参观时间</td>"+
+                        "<td></td>" +
+                        "<td class='kong'></td>" +
+                        "</tr>";
+                    var data = data.data;
+
+                    for (i in data) {
+                        str += "<tr>" +
+                            "<td>" + data[i].username + "</td>" +
+                            "<td>" + data[i].tel + "</td>" +
+                            "<td>" + data[i].visit_time + "</td>" +
+                            "<td></td>" +
+                            "<td></td>" +
+                            "</tr>";
+                    }
+                    $("#user").html(str);
+            });
+        }
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layer.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!-- -->
+        <li>
+            <div class="header">
+                    <span class="marr"><a href="{:url('member/intention')}" target="iframe">意向客户</a>>预缴诚意金</span>
+                </div>
+                <div class="dibai">
+                    <form action="" method="post">
+                    <div class="yujiao">
+                        预缴诚意金金额：（元）
+                        <input type="number" name="prepay_money">
+                        预交日期:
+                        <input type="" name="prepay_time" id="yujiao">
+                        <img src="/css/images/calendar.png" class="rili">
+                        <button type="submit" class="save">确认</button>
+                    </div>
+                    </form>
+                </div>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        laydate.render({
+            elem: '#yujiao',
+            festival: true, //显示节日
+            choose: function(datas){ //选择日期完毕的回调
+            }
+        });
+    </script>
+</body>
+</html>

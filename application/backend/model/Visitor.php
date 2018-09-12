@@ -4,7 +4,7 @@ namespace app\backend\model;
 
 use think\Model;
 
-class User extends Model
+class Visitor extends Model
 {
     public function getVisitTimeAttr($value)
     {

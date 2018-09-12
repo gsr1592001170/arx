@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layer.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!-- -->
+        <li>
+            <div class="header">
+                    <span class="marr"><a href="{:url('member/pre')}" target="iframe">预签约客户</a>>签约</span>
+                </div>
+                <div class="dibai">
+                    <form action="" method="post">
+                    <div class="contract">
+                        <span class="youbian">
+                            预定房型
+                            <select name="ras">
+                                <option value="一室一厅">一室一厅</option>
+                                <option value="二室一厅">二室一厅</option>
+                                <option value="二室二厅">二室二厅</option>
+                                <option value="幸福套房">幸福套房</option>
+                            </select>
+                            预定房号
+                            <input type="" name="brn">
+                            签约金额<input type="" name="money">
+                        </span>
+                        <span class="youbian">
+                            预缴定金
+                            <input type="" name="prepay_money" value="{$member['prepay_money']}">
+                            未付尾款
+                            <input type="" name="unpaid_money">
+                            套餐备注<input type="" name="content">
+                        </span>
+                        <button type="submit" class="save">确认</button>
+                    </div>
+                    </form>
+                </div>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        laydate.render({
+            elem: '#detailTime',
+            festival: true, //显示节日
+            choose: function(datas){ //选择日期完毕的回调       
+            }
+        });
+    </script>
+</body>
+</html>

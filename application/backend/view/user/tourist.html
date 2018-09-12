@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class=right>
+		<li>
+			<div class="header">
+				<span class="marr">游客信息</span>
+				<div class="choicetime">
+					<form action="" method="get">
+					<input type="text" name="keyword" class="choice" placeholder="选择日期" id="touristtime" >
+					<button type="submit"><img src="/css/images/calendar.png" class="shijian click" id="touristtime"></button>
+					</form>
+				</div>
+			</div>
+			<span class="add click color"><a href="{:url('user/add')}" target="iframe">添加用户</a></span>
+			<table class="query">
+				<tr>
+					<td>姓名</td>
+					<td>电话</td>
+					<td>预约参观时间</td>
+					<td></td>
+					<td class="kong"></td>
+				</tr>
+				<?php foreach($users as $user):?>
+				<tr>
+					<td>{$user['username']}</td>
+					<td>{$user['tel']}</td>
+					<td class="visittime">{$user['visit_time']}</td>
+					<td><a class="delete click color" href="{:url('user/del',$user)}">删除</a></td>
+					<td class="kong"></td>
+				</tr>
+				<?php endforeach;?>
+			</table>
+		</li>		
+	</ul>
+	<script type="text/javascript">
+		laydate.render({
+                elem: '#touristtime',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调
+                }
+            });
+		// 删除
+        $(".query .delete").click(function(){
+            layer.confirm('是否删除?', {title:'提示'}, function(index){
+              //do something
+              
+              layer.close(index);
+            }); 
+        })
+	</script>
+</body>
+</html>

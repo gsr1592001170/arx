@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-数据中心的业绩查询</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!--6 一 数据的 业绩查询 -->
+        <li>
+            <div class="header">
+                <span class="marr"><a href="{:url('Index/data')}" class="click">数据中心</a>>业绩查询</span>
+                <div class="shaixuan">
+                    <input type="date" name="" class="sxtime">
+                    <img src="/css/images/calendar.png" class="click" id="perforTime">
+                    <span class="search">
+                        <input type="text" name="keyword" placeholder="输入姓名" class="name">
+                        <img src="/css/images/search.png" class="click">
+                    </span>
+                </div>
+            </div>
+            <table class="query">
+                <tr>
+                    <td>姓名</td>
+                    <td>签约人数</td>
+                    <td>签约金额</td>
+                    <td>操作</td>
+                    <td class="kong"></td>
+                </tr>
+                <?php foreach($admins as $admin):?>
+                    <tr>
+                    <td>{$admin['name']}</td>
+                    <td>{$admin['signer']}</td>
+                    <td>{$admin['money']}</td>
+                    <td class="color"><a class="moredetail click" href="{:url('index/detail',$admin)}">详情</a></td>
+                    <td class="kong"></td>
+                    </tr>
+                <?php endforeach;?>
+            </table>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        laydate.render({
+                elem: '#perforTime',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调
+                }
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-游客信息的添加用户</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!--8 二  游客信息的添加用户 -->
+        <li>
+            <div class="header">
+                <span class="marr"><a href="{:url('user/index')}" class="click">游客信息</a>>添加用户</span>
+            </div>
+            <div class="addcustomer">
+                <form class="form">
+                    <div class="input">
+                        姓名：<input type="text" name="username" class="kuan">
+                        电话：<input type="number" name="tel" class="kuan"> 生产医院：<input type="text" name="hospital" class="kuan">
+                    </div>
+                    <div class="input">
+                        预产期：<input type="text" name="yuchanqi" class="kuan" id="expected">
+                        <img src="/css/images/calendar.png" class="date">
+                        参观时间：<input type="text" name="visit_time" class="kuan" id="visittime">
+                        <img src="/css/images/calendar.png" class="visitdate">
+                        来源：<br>
+                        <input type="radio" name="source" value="电视电话">电视电话
+                        <input type="radio" name="source" value="朋友圈">朋友圈
+                        <input type="radio" name="source" value="报纸">报纸
+                        <input type="radio" name="source" value="网络">网络
+                        <input type="radio" name="source" value="其他">其他
+                    </div>
+                    <button class="save click">保存</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+    <script type="text/javascript">
+        laydate.render({
+                elem: '#expected',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+        laydate.render({
+                elem: '#visittime',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+        $('.save').click(function () {
+            $.ajax({
+                //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "{:url('user/add')}" ,//url
+                data: $('input').serialize(),
+                success: function (data) {
+                    alert("提示："+data.msg);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

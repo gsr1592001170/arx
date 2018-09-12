@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-签约客户的备注</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!--13 三 客户信息的签约客户   备注-->
+            <li>
+                <div class="header">
+                    <span class="marr"><a href="{:url('member/contract')}" class="click">签约客户</a>>备注</span>
+                </div>
+                <ul class="edit">
+                    <li>
+                        <span class="reling">客户需求</span>
+                        <?php foreach($content['demand'] as $value):?>
+                        <span class="tuoyuan">
+                            {$data[$value]}
+                        </span>
+                        <?php endforeach;?>
+                    </li>
+                    <li>
+                        <span class="reling">客户家庭分析</span>
+                        {$content['situation']}
+                    </li>
+                    <li>
+                        <span class="reling">成交关键节点</span>
+                        {$content['key_node']}
+                    </li>
+                    <li>
+                        <span class="reling">下一步跟踪建议</span>
+                        {$content['proposal']}
+                    </li>
+                    <li>
+                        <span class="reling">需要的资源</span>
+                        {$content['resource']}
+                    </li>
+                </ul>
+            </li>
+</body>
+</html>

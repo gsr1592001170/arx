@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layer.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body class="data">
+	<div class="head">
+		<img src="/css/images/logodata.png" width="100%" class="logodata">
+		<div class="setup">
+			<a href="{:url('admin/notice')}" target="iframe"><img src="/css/images/news.png" class="new click"></a>
+			<if>
+				<span class="redcircle click"></span>
+			</if>
+			<span class="click">{$admin['name']}</span>&nbsp;|&nbsp;<span class="quit click">退出</span>
+		</div>
+	</div>
+	<div class="bottom">
+		<ul class="left">
+			<li>
+				<a href="{:url('index/adviserpersonaldata')}" target="iframe" class="on"><img src="/css/images/list1-on.png">个人数据&nbsp;&nbsp;></a>
+			</li>
+			<li class="list">
+				<a href="{:url('user/index')}" target="iframe"><img src="/css/images/list2.png">游客信息&nbsp;&nbsp;></a>
+			</li>
+			<li class="list">
+				<a href="{:url('member/target')}" target="iframe"><img src="/css/images/list3.png">客户信息&nbsp;&nbsp;></a>
+				<ul class="customer">
+					<li><a href="{:url('member/target')}" target="iframe" class="color">>>目标客户</a></li>
+					<li><a href="{:url('member/intention')}" target="iframe">>>意向客户</a></li>
+					<li><a href="{:url('member/pre')}" target="iframe">>>预签约客户</a></li>
+					<li><a href="{:url('member/contract')}" target="iframe">>>签约客户</a></li>
+				</ul>
+			</li>
+			<li class="list">
+				<a href="{:url('visitor/index')}" target="iframe"><img src="/css/images/list4.png">访客登记&nbsp;&nbsp;></a>
+			</li>
+		</ul>
+		<iframe src="{:url('Index/adviserPersonalData')}" name="iframe" class="right">
+		</iframe>
+	</div>
+	<script type="text/javascript">
+		// 退出
+		$(".quit").click(function(){
+			layer.confirm('确认退出?', {title:'提示'}, function(index){
+              // 退出操作
+              
+              layer.close(index);
+
+              location.href="{:url('login/logout')}"
+            }); 
+		})
+	</script>
+</body>
+</html>

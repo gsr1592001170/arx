@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layer.css">
+    <style type="text/css">
+        .baocun{
+            width: 100px;
+            height: 50px;
+            background-color: white;
+            border: none;
+        }
+    </style>
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!-- -->
+        <li>
+           <div class="header">
+                    <span class="marr"><a href="{:url('member/target')}" target="iframe">目标客户</a>>编辑</span>
+                </div>
+            <form action="" method="post">
+                <ul class="edit">
+                    <li>
+                        <span class="bianju">
+                            有无意向坐月子中心：
+                            <input type="radio" name="lock" value="1">有
+                            <input type="radio" name="lock" value="0">无
+                        </span>
+                        <span class="bianju">
+                            客户侧重需求（多选）：
+                            <input type="checkbox" name="demand[]" value="1">环境
+                            <input type="checkbox" name="demand[]" value="2">地理位置
+                            <input type="checkbox" name="demand[]" value="3">产后恢复
+                            <input type="checkbox" name="demand[]" value="4">宝宝护理
+                            <input type="checkbox" name="demand[]" value="5">营养月子餐
+                            <input type="checkbox" name="demand[]" value="0">其它
+                        </span>
+                    </li>
+                    <li>
+                        <span class="import">
+                            预产期：
+                            <input type="text" value="{$member['yuchanqi']}">
+                        </span>
+                        <span class="import">
+                            生产医院：
+                            <input type="text" name="hospital" value="{$member['hospital']}">
+                        </span>
+                        <span class="import">
+                            地址：
+                            <input type="text" name="address" value="{$member['address']}">
+                        </span>
+                    </li>
+                    <li>
+                        <ul>
+                            <li>
+                                客户家庭情况分析：
+                                <textarea placeholder="第几胎、父母及配偶的意见、谁做主？" name="situation"></textarea>
+                            </li>
+                            <li>
+                                成交关键节点：
+                                <textarea placeholder="关键需要解决的问题、家人思想的沟通、钱的问题？" name="key_node"></textarea>
+                            </li>
+                            <li>
+                                下一步跟踪建议：
+                                <textarea placeholder="接待人员根据情况提出下一步计划？" name="proposal"></textarea>
+                            </li>
+                            <li>
+                                需要的资源：
+                                <textarea placeholder="如果需要成交、需要申请的礼品、金额、服务？" name="resource"></textarea>
+                            </li>
+                        </ul>
+                        <div class="hesave">
+                            <button class="baocun">保存</button>
+                        </div>
+                    </li>
+                </ul>
+            </form>
+        </li>
+    </ul>
+</body>
+</html>

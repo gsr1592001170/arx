@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-个人数据</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layer.css">
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<li>
+            <div class="header">
+                <span class="marr">个人数据</span>
+                <ul class="times">
+                    <li class="bian">昨日</li>
+                    <li class="bian">最近7日</li>
+                    <li class="color">最近30日</li>
+                </ul>
+            </div>
+            <div class="wage tubiao">
+                <!--昨天的数据-->
+                <ul style="display: none">
+                    <li class="signing zhu di">
+                        签约业绩
+                        <div class="total">
+                            总签约金额：{$data['yj']['moneys']}<br>
+                            总人数：{$data['yj']['count']}人
+                        </div>
+                        <div id="yestodayqianyue" class="tu zhu di marglft"></div>
+                    </li>
+                    <li class="di">
+                        侧重需求
+                        <div id="yestodaycezhong" class="tu marglft"></div>
+                    </li>
+                    <li class="zhu">
+                        客户种类
+                        <div id="yestodaykehu" class="tu zhu marglft"></div>
+                    </li>
+                    <li>
+                        渠道来源
+                        <div id="yestodayqudao" class="tu"></div>
+                    </li>
+                </ul>
+                <!--最近7天的数据-->
+                <ul style="display: none">
+                    <li class="signing zhu di">
+                        签约业绩
+                        <div class="total">
+                            总签约金额：{$data['yj']['moneys']}<br>
+                            总人数：{$data['yj']['count']}人
+                        </div>
+                        <div id="weekqianyue" class="tu zhu di marglft"></div>
+                    </li>
+                    <li class="di">
+                        侧重需求
+                        <div id="weekcezhong" class="tu marglft"></div>
+                    </li>
+                    <li class="zhu">
+                        客户种类
+                        <div id="weekkehu" class="tu zhu marglft"></div>
+                    </li>
+                    <li>
+                        渠道来源
+                        <div id="weekqudao" class="tu"></div>
+                    </li>
+                </ul>
+                <!--最近30天的数据-->
+                <ul>
+                    <li class="signing zhu di">
+                        签约业绩
+                        <div class="total">
+                            总签约金额：{$data['yj']['moneys']}<br>
+                            总人数：{$data['yj']['count']}人
+                        </div>
+                        <div id="qianyue" class="tu zhu di marglft"></div>
+                    </li>
+                    <li class="di">
+                        侧重需求
+                        <div id="cezhong" class="tu marglft"></div>
+                    </li>
+                    <li class="zhu">
+                        客户种类
+                        <div id="kehu" class="tu zhu marglft"></div>
+                    </li>
+                    <li>
+                        渠道来源
+                        <div id="qudao" class="tu"></div>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
+    </ul>
+
+    <script type="text/javascript">
+        // 数据显示的时间段筛选
+        $(".times>li").click(function(){
+            var i=$(this).index();
+            $(this).addClass('color').siblings().removeClass('color');
+            $(".wage>ul:eq("+i+")").css("display","block").siblings().css("display","none");
+        })
+        // 统计图表昨日
+        var yestodayyeji = echarts.init(document.getElementById("yestodayqianyue"));
+        var yestodaysigning = {
+                color: ['#f0ca37', '#f18760'],
+                legend: {
+                    left:'left',
+                    data:['金额', '人数']
+                },
+                 tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    offset: 0,
+                    axisTick: {show: false},
+                    data:[
+                        '昨天'
+                    ]
+                },
+                yAxis: [{
+                    type: 'value',
+                    name: '金额：（元）'
+                },{
+                    type: 'value',
+                    name: '数量：（人）',
+                    min: 0,
+                    max: 20,
+                    interval: 5
+                }],
+                series: [
+                    {
+                        name:'金额：（元）',
+                        type: 'bar',
+                        data:[{$data['one']['first']}]
+                    },
+                    {
+                    name:'数量：（人）',
+                    yAxisIndex: 1,
+                        type: 'bar',
+                        data:[{$data['one']['firstc']}]
+                    }
+                ]
+            }
+        yestodayyeji.setOption(yestodaysigning);
+        var yestodayxuqiu = echarts.init(document.getElementById("yestodaycezhong"));
+        var yestodaydemand = {
+            xAxis: {
+                type: 'category',
+                name:'需求',
+                symbol:['none', 'arrow'],
+                data: ['环境', '地理位置', '产后恢复', '宝宝护理', '营养月子餐', '其他']
+            },
+            yAxis: {
+                type: 'value',
+                name: '比重',
+                    axisLabel: {
+                formatter: '{value} %',
+                axisLine:{lineStyle:{color:'#f18760',width:1,type:'solid'}},
+            }
+            },
+            series: [{
+                type: 'line',
+                data: [{$data['count']['xq'][1]}, {$data['count']['xq'][2]}, {$data['count']['xq'][3]}, {$data['count']['xq'][4]},{$data['count']['xq'][5]}, {$data['count']['xq'][0]}]
+            }]
+        };
+        yestodayxuqiu.setOption(yestodaydemand);
+        var yestodayzhonglei = echarts.init(document.getElementById("yestodaykehu"));
+         var yestodaycustomer = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            legend: {
+                left:'left',
+                itemHeight:14,
+                itemWidth:14,
+                borderRadius:0,
+                data:['销量']
+            },
+            xAxis: {
+                name:'人数',
+                data: ["目标客户","意向客户","签约客户","预签约客户"]
+            },
+            yAxis: {
+                    name: '种类',
+                    min: 0,
+                    max: 100,
+                    interval: 20,
+            },
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data:[
+                    {$data['count']['zl'][1]??0},{$data['count']['zl'][2]??0}, {$data['count']['zl'][3]??0}, {$data['count']['zl'][4]??0}
+                ] ,
+                itemStyle: { 
+                    normal: { 
+                    color: function(params) { 
+                    var colorList = [ 
+                    '#f18760','#77c70e','#6652cf','#0cc0db']; 
+                    return colorList[params.dataIndex] 
+                    }, 
+                    　　　　　//以下为是否显示 
+                    label: { 
+                        show: false 
+                        } 
+                    } 
+                } 
+            },
+        ]};
+        yestodayzhonglei.setOption(yestodaycustomer);
+
+        var yestodaylaiyuan = echarts.init(document.getElementById("yestodayqudao"));
+        var yestodaysource = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    left:'right',
+                    align:'left',
+                    itemWidth:18,
+                    itemHeight:18,
+                    data:['电视电话','朋友圈','报纸','网络','其它']
+                },
+                series: [
+                    {
+                        name:'渠道来源',
+                        type:'pie',
+                        radius: ['45%', '90%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: false
+                            }
+                        },
+                        data:[
+                            {value:{$data['count']['ly']['电视电话']}, name:'电视电话'},
+                            {value:{$data['count']['ly']['朋友圈']}, name:'朋友圈'},
+                            {value:{$data['count']['ly']['报纸']}, name:'报纸'},
+                            {value:{$data['count']['ly']['网络']}, name:'网络'},
+                            {value:{$data['count']['ly']['其他']}, name:'其他'}
+                        ],
+                        itemStyle: { 
+                normal: { 
+                color: function(params) { 
+                var colorList = [ 
+                '#f0ca37','#0cc0db','#6652cf','#77c70e','#f18760']; 
+                return colorList[params.dataIndex] 
+                }, 
+                label: { 
+                show: false 
+                } 
+                } 
+                } 
+                    }
+                ]
+            };
+        yestodaylaiyuan.setOption(yestodaysource);
+        // 统计图表7天
+        var weekyeji = echarts.init(document.getElementById("weekqianyue"));
+        var weeksigning = {
+            color: ['#f0ca37', '#f18760'],
+            legend: {
+                left:'left',
+                data:['金额', '人数']
+            },
+            tooltip: {},
+            xAxis: {
+                type: 'category',
+                offset: 0,
+                axisTick: {show: false},
+                data:['第一天','第二天','第三天','第四天','第五天','第六天','第七天']
+            },
+            yAxis: [{
+                type: 'value',
+                name: '金额：（元）'
+            },{
+                type: 'value',
+                name: '数量：（人）',
+                min: 0,
+                max: 20,
+                interval: 5
+            }],
+            series: [
+                {
+                    name:'金额：（元）',
+                    type: 'bar',
+                    data:[{$data['seven']['first']??0},{$data['seven']['second']??0},{$data['seven']['third']??0},{$data['seven']['fourth']??0},{$data['seven']['five']??0},{$data['seven']['sex']??0},{$data['seven']['seven']??0}]
+                },
+                {
+                    name:'数量：（人）',
+                    yAxisIndex: 1,
+                    type: 'bar',
+                    data:[{$data['seven']['firstc']},{$data['seven']['secondc']},{$data['seven']['thirdc']},{$data['seven']['fourthc']},{$data['seven']['fivec']},{$data['seven']['sexc']},{$data['seven']['sevenc']}]
+                }
+            ]
+        }
+        weekyeji.setOption(weeksigning);
+        var weekxuqiu = echarts.init(document.getElementById("weekcezhong"));
+        var weekdemand = {
+            xAxis: {
+                type: 'category',
+                name:'需求',
+                symbol:['none', 'arrow'],
+                data: ['环境', '地理位置', '产后恢复', '宝宝护理', '营养月子餐', '其他']
+            },
+            yAxis: {
+                type: 'value',
+                name: '比重',
+                axisLabel: {
+                    formatter: '{value} %',
+                    axisLine:{lineStyle:{color:'#f18760',width:1,type:'solid'}},
+                }
+            },
+            series: [{
+                type: 'line',
+                data: [{$data['count']['xq'][1]}, {$data['count']['xq'][2]}, {$data['count']['xq'][3]}, {$data['count']['xq'][4]},{$data['count']['xq'][5]}, {$data['count']['xq'][0]}]
+            }]
+        };
+        weekxuqiu.setOption(weekdemand);
+        var weekzhonglei = echarts.init(document.getElementById("weekkehu"));
+        var weekcustomer = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            legend: {
+                left:'left',
+                itemHeight:14,
+                itemWidth:14,
+                borderRadius:0,
+                data:['销量']
+            },
+            xAxis: {
+                name:'人数',
+                data: ["目标客户","意向客户","签约客户","预签约客户"]
+            },
+            yAxis: {
+                name: '种类',
+                min: 0,
+                max: 100,
+                interval: 20,
+            },
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data:[
+                    {$data['count']['zl'][1]??0},{$data['count']['zl'][2]??0}, {$data['count']['zl'][3]??0}, {$data['count']['zl'][4]??0}
+                ] ,
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                '#f18760','#77c70e','#6652cf','#0cc0db'];
+                            return colorList[params.dataIndex]
+                        },
+                        //以下为是否显示
+                        label: {
+                            show: false
+                        }
+                    }
+                }
+            },
+            ]};
+        weekzhonglei.setOption(weekcustomer);
+
+        var weeklaiyuan = echarts.init(document.getElementById("weekqudao"));
+        var weeksource = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left:'right',
+                align:'left',
+                itemWidth:18,
+                itemHeight:18,
+                data:['电视电话','朋友圈','报纸','网络','其它']
+            },
+            series: [
+                {
+                    name:'渠道来源',
+                    type:'pie',
+                    radius: ['45%', '90%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:{$data['count']['ly']['电视电话']}, name:'电视电话'},
+                        {value:{$data['count']['ly']['朋友圈']}, name:'朋友圈'},
+                        {value:{$data['count']['ly']['报纸']}, name:'报纸'},
+                        {value:{$data['count']['ly']['网络']}, name:'网络'},
+                        {value:{$data['count']['ly']['其他']}, name:'其他'}
+                    ],
+                    itemStyle: {
+                        normal: {
+                            color: function(params) {
+                                var colorList = [
+                                    '#f0ca37','#0cc0db','#6652cf','#77c70e','#f18760'];
+                                return colorList[params.dataIndex]
+                            },
+                            label: {
+                                show: false
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        weeklaiyuan.setOption(weeksource);
+        // 统计图表30天
+
+        var yeji = echarts.init(document.getElementById("qianyue"));
+        var signing = {
+            color: ['#f0ca37', '#f18760'],
+            legend: {
+                left:'left',
+                data:['金额', '人数']
+            },
+            tooltip: {},
+            xAxis: {
+                type: 'category',
+                offset: 0,
+                axisTick: {show: false},
+                data:['第一周','第二周','第三周','第四周']
+            },
+            yAxis: [{
+                type: 'value',
+                name: '金额：（元）'
+            },{
+                type: 'value',
+                name: '数量：（人）',
+                min: 0,
+                max: 20,
+                interval: 5
+            }],
+            series: [
+                {
+                    name:'金额：（元）',
+                    type: 'bar',
+                    data:[{$data['thirty']['first']},{$data['thirty']['second']},{$data['thirty']['third']},{$data['thirty']['fourth']}]
+                },
+                {
+                    name:'数量：（人）',
+                    yAxisIndex: 1,
+                    type: 'bar',
+                    data:[{$data['thirty']['firstc']},{$data['thirty']['secondc']},{$data['thirty']['thirdc']},{$data['thirty']['fourthc']}]
+                }
+            ]
+        }
+        yeji.setOption(signing);
+        var xuqiu = echarts.init(document.getElementById("cezhong"));
+        var demand = {
+            xAxis: {
+                type: 'category',
+                name:'需求',
+                symbol:['none', 'arrow'],
+                data: ['环境', '地理位置', '产后恢复', '宝宝护理', '营养月子餐', '其他']
+            },
+            yAxis: {
+                type: 'value',
+                name: '比重',
+                axisLabel: {
+                    formatter: '{value} %',
+                    axisLine:{lineStyle:{color:'#f18760',width:1,type:'solid'}},
+                }
+            },
+            series: [{
+                type: 'line',
+                data: [{$data['count']['xq'][1]}, {$data['count']['xq'][2]}, {$data['count']['xq'][3]}, {$data['count']['xq'][4]},{$data['count']['xq'][5]}, {$data['count']['xq'][0]}]
+            }]
+        };
+        xuqiu.setOption(demand);
+        var zhonglei = echarts.init(document.getElementById("kehu"));
+        var customer = {
+            title: {
+                text: ''
+            },
+            tooltip: {},
+            legend: {
+                left:'left',
+                itemHeight:14,
+                itemWidth:14,
+                borderRadius:0,
+                data:['销量']
+            },
+            xAxis: {
+                name:'人数',
+                data: ["目标客户","意向客户","签约客户","预签约客户"]
+            },
+            yAxis: {
+                name: '种类',
+                min: 0,
+                max: 100,
+                interval: 20,
+            },
+            series: [{
+                name: '销量',
+                type: 'bar',
+                data:[
+                    {$data['count']['zl'][1]??0},{$data['count']['zl'][2]??0}, {$data['count']['zl'][3]??0}, {$data['count']['zl'][4]??0}
+                ] ,
+                itemStyle: {
+                    normal: {
+                        color: function(params) {
+                            var colorList = [
+                                '#f18760','#77c70e','#6652cf','#0cc0db'];
+                            return colorList[params.dataIndex]
+                        },
+                        //以下为是否显示
+                        label: {
+                            show: false
+                        }
+                    }
+                }
+            },
+            ]};
+        zhonglei.setOption(customer);
+
+        var laiyuan = echarts.init(document.getElementById("qudao"));
+        var source = {
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b}: {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left:'right',
+                align:'left',
+                itemWidth:18,
+                itemHeight:18,
+                data:['电视电话','朋友圈','报纸','网络','其它']
+            },
+            series: [
+                {
+                    name:'渠道来源',
+                    type:'pie',
+                    radius: ['45%', '90%'],
+                    avoidLabelOverlap: false,
+                    label: {
+                        normal: {
+                            show: false,
+                            position: 'center'
+                        },
+                        emphasis: {
+                            show: true,
+                            textStyle: {
+                                fontSize: '30',
+                                fontWeight: 'bold'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            show: false
+                        }
+                    },
+                    data:[
+                        {value:{$data['count']['ly']['电视电话']}, name:'电视电话'},
+                        {value:{$data['count']['ly']['朋友圈']}, name:'朋友圈'},
+                        {value:{$data['count']['ly']['报纸']}, name:'报纸'},
+                        {value:{$data['count']['ly']['网络']}, name:'网络'},
+                        {value:{$data['count']['ly']['其他']}, name:'其他'}
+                    ],
+                    itemStyle: {
+                        normal: {
+                            color: function(params) {
+                                var colorList = [
+                                    '#f0ca37','#0cc0db','#6652cf','#77c70e','#f18760'];
+                                return colorList[params.dataIndex]
+                            },
+                            label: {
+                                show: false
+                            }
+                        }
+                    }
+                }
+            ]
+        };
+        laiyuan.setOption(source);
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>爱瑞馨母婴护理中心-信息页面</title>
+    <link rel="stylesheet" href="/css/register.css">
+    <link rel="stylesheet" href="/css/layer.css">
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/layer.js"></script>
+    <script src="/js/laydate.js"></script>
+    <script src="/js/angular.min.js"></script>
+    <script src="/js/echarts.min.js"></script>
+    <script src="/js/managerData.js"></script>
+</head>
+<body>
+	<ul class="right">
+		<!-- 5 信息页面-->
+        <li>
+            <div class="header">
+                <span class="marr">信息</span>
+                    <img src="/css/images/calendar.png" class="newstime click" id="news">
+            </div>
+            <table class="query">
+                <?php foreach($notices as $notice):?>
+                <tr>
+                    <td class="multi"><input type="checkbox" name="handle" checked=""></td><td>{$notice['create_time']}</td>
+                    <td>{$notice['content']}</td>
+                    <td><a href="{:url('admin/delNotice')}?id={$notice['id']}"  class="color click delete">删除</a></td>
+                    <td class="kong"></td>
+                </tr>
+                <?php endforeach;?>
+            </table>
+            {$notices->render()}
+        </li>
+    </ul>
+    <script type="text/javascript">
+        // 时间选框
+        laydate.render({
+                elem: '#news',
+                festival: true, //显示节日
+                choose: function(datas){ //选择日期完毕的回调       
+                }
+            });
+    </script>
+</body>
+</html>
